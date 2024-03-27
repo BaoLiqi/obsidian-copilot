@@ -26,6 +26,12 @@ export interface ModelConfig {
   lmStudioBaseUrl?: string;
 }
 
+export interface CustomModelConfig extends ModelConfig{
+  modelDisplayNameUI:string;
+  // for ChatModelManager.modelMap[modelDisplayName];
+  modelDisplayName:string;
+}
+
 export interface LangChainParams {
   openAIApiKey: string;
   huggingfaceApiKey: string;

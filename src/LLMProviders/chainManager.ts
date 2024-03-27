@@ -75,6 +75,7 @@ export default class ChainManager {
     this.chatModelManager = ChatModelManager.getInstance(
       this.langChainParams,
       encryptionService,
+      settings
     );
     this.promptManager = PromptManager.getInstance(this.langChainParams);
     this.getDbVectorStores = getDbVectorStores;

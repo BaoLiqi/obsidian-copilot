@@ -3,6 +3,7 @@ import { App, Notice, PluginSettingTab, Setting } from "obsidian";
 import React from 'react';
 import { createRoot } from "react-dom/client";
 import SettingsMain from "./components/SettingsMain";
+import { CustomModelConfig, ModelConfig } from "@/aiParams";
 
 export interface CopilotSettings {
   openAIApiKey: string;
@@ -41,6 +42,7 @@ export interface CopilotSettings {
   enableEncryption: boolean;
   maxSourceChunks: number;
   qaExclusionPaths: string;
+  customConfig: CustomModelConfig[];
 }
 
 export class CopilotSettingTab extends PluginSettingTab {

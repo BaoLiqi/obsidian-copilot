@@ -7,10 +7,10 @@ export const DEFAULT_SYSTEM_PROMPT =
   "You are Obsidian Copilot, a helpful assistant that integrates AI to Obsidian note-taking.";
 
 export enum ChatModels {
-  GPT_35_TURBO = "gpt-3.5-turbo",
+  GPT_35_TURBO = "gpt-3.5-turbo-0125",
   GPT_35_TURBO_16K = "gpt-3.5-turbo-16k",
   GPT_4 = "gpt-4",
-  GPT_4_TURBO = "gpt-4-turbo-preview",
+  GPT_4_TURBO = "gpt-4-0125-preview",
   GPT_4_32K = "gpt-4-32k",
   GEMINI_PRO = "gemini-pro",
   OLLAMA = "ollama",

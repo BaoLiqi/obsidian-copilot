@@ -1,4 +1,4 @@
-import { SetChainOptions } from "@/aiParams";
+import { CustomModelConfig, SetChainOptions } from "@/aiParams";
 import {
   AI_SENDER,
   ChatModelDisplayNames,
@@ -20,8 +20,10 @@ import {
 } from "@/components/Icons";
 import { stringToChainType } from "@/utils";
 import React from "react";
+import { CopilotSettings } from "@/settings/SettingsPage";
 
 interface ChatIconsProps {
+  settings:CopilotSettings;
   currentModel: string;
   setCurrentModel: (model: string) => void;
   currentChain: ChainType;
@@ -40,6 +42,7 @@ interface ChatIconsProps {
 }
 
 const ChatIcons: React.FC<ChatIconsProps> = ({
+  settings,
   currentModel,
   setCurrentModel,
   currentChain,
@@ -149,6 +152,7 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
     handleChainSelection();
   }, [selectedChain]);
 
+  const items:CustomModelConfig[] = settings.customConfig;
   return (
     <div className="chat-icons-container">
       <div className="chat-icon-selection-tooltip">
@@ -162,16 +166,17 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
             <option value={ChatModelDisplayNames.GPT_35_TURBO}>
               {ChatModelDisplayNames.GPT_35_TURBO}
             </option>
-            <option value={ChatModelDisplayNames.GPT_35_TURBO_16K}>
+            {/* <option value={ChatModelDisplayNames.GPT_35_TURBO_16K}>
               {ChatModelDisplayNames.GPT_35_TURBO_16K}
             </option>
             <option value={ChatModelDisplayNames.GPT_4}>
               {ChatModelDisplayNames.GPT_4}
-            </option>
+            </option> */}
             <option value={ChatModelDisplayNames.GPT_4_TURBO}>
               {ChatModelDisplayNames.GPT_4_TURBO}
             </option>
-            <option value={ChatModelDisplayNames.GPT_4_32K}>
+            
+            {/* <option value={ChatModelDisplayNames.GPT_4_32K}>
               {ChatModelDisplayNames.GPT_4_32K}
             </option>
             <option value={ChatModelDisplayNames.AZURE_OPENAI}>
@@ -191,7 +196,13 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
             </option>
             <option value={ChatModelDisplayNames.OLLAMA}>
               {ChatModelDisplayNames.OLLAMA}
-            </option>
+            </option> */}
+
+            {items.map((item, index) => (
+              <option key={index} value={item.modelDisplayNameUI}>
+                {item.modelDisplayNameUI}
+              </option>
+            ))}
           </select>
           <span className="tooltip-text">Model Selection</span>
         </div>

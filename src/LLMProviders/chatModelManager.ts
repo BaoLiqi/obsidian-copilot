@@ -1,4 +1,4 @@
-import { LangChainParams, ModelConfig } from '@/aiParams';
+import { CustomModelConfig, LangChainParams, ModelConfig } from '@/aiParams';
 import {
   ANTHROPIC_MODELS,
   AZURE_MODELS,
@@ -12,6 +12,7 @@ import {
 } from '@/constants';
 import EncryptionService from '@/encryptionService';
 import { ProxyChatOpenAI } from '@/langchainWrappers';
+import { CopilotSettings } from '@/settings/SettingsPage';
 import { getModelName } from '@/utils';
 import { ChatAnthropic } from "@langchain/anthropic";
 import { ChatOllama } from "@langchain/community/chat_models/ollama";
@@ -33,22 +34,25 @@ export default class ChatModelManager {
       vendor: string;
     }
   >;
-
+  private settings:CopilotSettings;
 
   private constructor(
     private langChainParams: LangChainParams,
-    encryptionService: EncryptionService
+    encryptionService: EncryptionService,
+    settings:CopilotSettings
   ) {
     this.encryptionService = encryptionService;
+    this.settings = settings;
     this.buildModelMap();
   }
 
   static getInstance(
     langChainParams: LangChainParams,
     encryptionService: EncryptionService,
+    settings:CopilotSettings
   ): ChatModelManager {
     if (!ChatModelManager.instance) {
-      ChatModelManager.instance = new ChatModelManager(langChainParams, encryptionService);
+      ChatModelManager.instance = new ChatModelManager(langChainParams, encryptionService,settings);
     }
     return ChatModelManager.instance;
   }
@@ -172,8 +176,20 @@ export default class ChatModelManager {
   }
 
   setChatModel(modelDisplayName: string): void {
+    console.log('set chat model=',modelDisplayName)
+    let customConfig :CustomModelConfig|undefined;
+    this.settings.customConfig.forEach(cc=>{
+      if(cc.modelDisplayNameUI===modelDisplayName){
+        customConfig = cc;
+      }
+    })
+    if(customConfig){
+      modelDisplayName = customConfig.modelDisplayName;
+    }
+    
     if (!ChatModelManager.modelMap.hasOwnProperty(modelDisplayName)) {
-      throw new Error(`No model found for: ${modelDisplayName}`);
+      if(!customConfig)
+       throw new Error(`No model found for: ${modelDisplayName}`);
     }
     // MUST update it since chatModelManager is a singleton.
     this.langChainParams.model = getModelName(modelDisplayName);
@@ -187,8 +203,8 @@ export default class ChatModelManager {
       throw new Error(errorMessage);
     }
 
-    const modelConfig = this.getModelConfig(selectedModel.vendor);
-
+    const modelConfig = customConfig? customConfig:(this.getModelConfig(selectedModel.vendor));
+    console.log('final model config:',modelConfig)
     try {
       const newModelInstance = new selectedModel.AIConstructor({
         ...modelConfig,

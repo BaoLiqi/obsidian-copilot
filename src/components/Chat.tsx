@@ -460,6 +460,7 @@ const Chat: React.FC<ChatProps> = ({
       />
       <div className='bottom-container'>
         <ChatIcons
+          settings={settings}
           currentModel={currentModel}
           setCurrentModel={setModel}
           currentChain={currentChain}
