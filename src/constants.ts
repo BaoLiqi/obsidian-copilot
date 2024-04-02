@@ -4,7 +4,7 @@ export const CHAT_VIEWTYPE = "copilot-chat-view";
 export const USER_SENDER = "user";
 export const AI_SENDER = "ai";
 export const DEFAULT_SYSTEM_PROMPT =
-  "You are Obsidian Copilot, a helpful assistant that integrates AI to Obsidian note-taking.";
+  "You are a helpful assistant.";
 
 export enum ChatModels {
   GPT_35_TURBO = "gpt-3.5-turbo-0125",
