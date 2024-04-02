@@ -160,7 +160,7 @@ const Chat: React.FC<ChatProps> = ({
       }
 
       const now = new Date();
-      const noteFileName = `${defaultSaveFolder}/Chat-${formatDateTime(now)}.md`;
+      const noteFileName = `${defaultSaveFolder}/Note-${formatDateTime(now)}.md`;
       const newNote: TFile = await app.vault.create(noteFileName, chatContent);
       const leaf = app.workspace.getLeaf();
       leaf.openFile(newNote);
