@@ -163,18 +163,18 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
             value={currentModel}
             onChange={handleModelChange}
           >
-            <option value={ChatModelDisplayNames.GPT_35_TURBO}>
+            {/* <option value={ChatModelDisplayNames.GPT_35_TURBO}>
               {ChatModelDisplayNames.GPT_35_TURBO}
-            </option>
+            </option> */}
             {/* <option value={ChatModelDisplayNames.GPT_35_TURBO_16K}>
               {ChatModelDisplayNames.GPT_35_TURBO_16K}
             </option>
             <option value={ChatModelDisplayNames.GPT_4}>
               {ChatModelDisplayNames.GPT_4}
             </option> */}
-            <option value={ChatModelDisplayNames.GPT_4_TURBO}>
+            {/* <option value={ChatModelDisplayNames.GPT_4_TURBO}>
               {ChatModelDisplayNames.GPT_4_TURBO}
-            </option>
+            </option> */}
             
             {/* <option value={ChatModelDisplayNames.GPT_4_32K}>
               {ChatModelDisplayNames.GPT_4_32K}
@@ -187,11 +187,11 @@ const ChatIcons: React.FC<ChatIconsProps> = ({
             </option>
             <option value={ChatModelDisplayNames.GEMINI_PRO}>
               {ChatModelDisplayNames.GEMINI_PRO}
-            </option>
+            </option> */}
             <option value={ChatModelDisplayNames.OPENROUTERAI}>
               {ChatModelDisplayNames.OPENROUTERAI}
             </option>
-            <option value={ChatModelDisplayNames.LM_STUDIO}>
+            {/* <option value={ChatModelDisplayNames.LM_STUDIO}>
               {ChatModelDisplayNames.LM_STUDIO}
             </option>
             <option value={ChatModelDisplayNames.OLLAMA}>
